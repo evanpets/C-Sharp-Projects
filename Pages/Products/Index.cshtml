@@ -1,0 +1,47 @@
+﻿@page "/products/getall"
+@model ProductsWebDBApp.Pages.Products.IndexModel
+@{
+}
+
+<h2 class="text-center mb-4">Products</h2>
+<a class="btn btn-primary btn-lg mb-4" href="/Products/Create">Add Product</a>
+
+<table class="mx-auto table table-dark text-center">
+    <thead>
+        <tr><th colspan="6">Product List</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Edit/Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Products!.Count != 0)
+        {
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Title</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <a class="btn btn-primary" href="/products/@product.Id/update">Edit</a>
+                        <a class="btn btn-primary" href="javascript:void(0)" onclick="confirmDelete(@product.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (Model.ErrorObj is not null)
+    {
+        <p>@Model.ErrorObj.Message</p>
+    }
+</div>
+
+<script src="~/js/product.js"></script>
